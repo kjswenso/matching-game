@@ -37,8 +37,27 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-document.querySelector('.deck').addEventListener('click', function (evt) {
+const deck = document.querySelector('.deck');
+let cards = document.getElementsByTagName('li');
+
+/*//iterate over cards array to get info
+for (let i = 0; i < cards.length; i++) {
+	console.log(cards[i].classList);
+}*/
+
+//Code modified from Avoid Too Many Events lesson
+deck.addEventListener('click', function (evt) {
     if (evt.target.nodeName === 'LI') {  // ← verifies target is desired element
-        console.log('A li was clicked');
+        flipCard();
+        console.log('An li was clicked');
     }
 });
+
+//function to flip cards and display icon
+function flipCard() {
+	for (let i = 0; i < cards.length; i++) {
+		console.log(cards[i].classList.contains("show"));
+	}
+
+
+}
