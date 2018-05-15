@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 const deck = document.querySelector('.deck');
-let cards = deck.getElementsByTagName('li');
+let card = deck.querySelector('li');
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -45,8 +45,8 @@ for (let i = 0; i < cards.length; i++) {
 
 
 //Code modified from Avoid Too Many Events lesson
-deck.addEventListener('click', function (evt) {
-    if (evt.target.nodeName === 'LI') {  // ← verifies target is desired element
+deck.addEventListener('click', function (e) {
+    if (e.target.nodeName === 'LI') {  // ← verifies target is desired element
         flipCard();
         console.log('An li was clicked');
        }
@@ -54,13 +54,5 @@ deck.addEventListener('click', function (evt) {
 
 //function to flip cards and display icon
 function flipCard() {
-	for (let i = 0; i < cards.length; i++) {
-		if (cards[i].classList.contains('show') === true) {
-			continue;
-		}
-		else {
-			cards[i].classList.add('open', 'show');
-			break;
-		}
-	}
+	card.classList.add('open', 'show');
 }
