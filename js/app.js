@@ -1,8 +1,8 @@
 /*
  * Create a list that holds all of your cards
  */
-
-
+const deck = document.querySelector('.deck');
+let cards = deck.getElementsByTagName('li');
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -37,27 +37,30 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-const deck = document.querySelector('.deck');
-let cards = document.getElementsByTagName('li');
 
 /*//iterate over cards array to get info
 for (let i = 0; i < cards.length; i++) {
 	console.log(cards[i].classList);
 }*/
 
+
 //Code modified from Avoid Too Many Events lesson
 deck.addEventListener('click', function (evt) {
     if (evt.target.nodeName === 'LI') {  // ← verifies target is desired element
         flipCard();
         console.log('An li was clicked');
-    }
+       }
 });
 
 //function to flip cards and display icon
 function flipCard() {
 	for (let i = 0; i < cards.length; i++) {
-		console.log(cards[i].classList.contains("show"));
+		if (cards[i].classList.contains('show') === true) {
+			continue;
+		}
+		else {
+			cards[i].classList.add('open', 'show');
+			break;
+		}
 	}
-
-
 }
