@@ -2,13 +2,16 @@
  * Create a list that holds all of your cards
  */
 const deck = document.querySelector('.deck');
-let card = document.getElementsByClassName('card');
+let cards = document.getElementsByClassName('card');
+const cardDeck = [...cards];
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -45,16 +48,28 @@ for (let i = 0; i < cards.length; i++) {
 
 
 //Code modified from Avoid Too Many Events lesson
+//Add event listener for when cards are clicked
 deck.addEventListener('click', function (e) {
     if (e.target.nodeName === 'LI') {  // ← verifies target is desired element
       if (e.target.classList.contains('show')) {
-      	console.log("has show");
+        console.log("has show");
       }
       else {
       	e.target.classList.add('open', 'show');
-      	
+      	shownCards.push(e.target); 
+        console.log(shownCards);
       }
        }
 });
 
-//function to flip cards and display icon
+//list for open cards
+let shownCards = []; 
+
+//check to see if cards match
+/*function checkForMatch {
+  if (shownCards.length === 2)
+
+}*/
+
+//list for matched cards
+let matchesMade = [];
