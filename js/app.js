@@ -4,6 +4,13 @@
 const deck = document.querySelector('.deck');
 let cards = document.getElementsByClassName('card');
 const cardDeck = [...cards];
+
+//list of open cards
+let shownCards = []; 
+
+//list for matched cards
+let matchesMade = [];
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -56,24 +63,17 @@ deck.addEventListener('click', function (e) {
       }
       else {
       	e.target.classList.add('open', 'show');
-      	shownCards.push(e.target); 
+      	shownCards.push(e.target.querySelector('i').classList.value); 
         console.log(shownCards);
       }
        }
-       checkForMatch();
+    if (shownCards.length === 2) {
+      if (shownCards[0] === shownCards[1]) {
+        console.log('match');
+      }
+      else {
+        console.log('not a match');
+      }
+    }
+
 });
-
-//list for open cards
-let shownCards = []; 
-
-//check to see if cards match
-function checkForMatch(array) {
-  if (shownCards.length === 2) {
-    //let symbol = shownCards[i].child.classList;
-    console.log ('length is two');
-  }
-
-}
-
-//list for matched cards
-let matchesMade = [];
