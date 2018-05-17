@@ -70,14 +70,28 @@ deck.addEventListener('click', function (e) {
 function checkForMatch() {
   if (shownCards.length === 2) {
         if (shownCards[0].querySelector('i').classList.value === shownCards[1].querySelector('i').classList.value) {
-          matchesMade.push(shownCards);
-          console.log(matchesMade);
+          cardsMatch();
         }
         else {
-          for (let i = 0; i < shownCards.length; i++) {
-          shownCards[i].classList.remove('open', 'show');
-          }
+          cardsDontMatch();
         }
         shownCards.splice(0, 2);
       }
+}
+
+//if cards match, move into matches list
+function cardsMatch() {
+    matchesMade.push(shownCards);
+    console.log(matchesMade);
+    for (let i = 0; i < shownCards.length; i++) {
+      shownCards[i].classList.remove('open', 'show');
+      shownCards[i].classList.add('match', 'disabled');
+    }
+}
+
+//if cards don't match, flip them back over
+function cardsDontMatch() {
+  for (let i = 0; i < shownCards.length; i++) {
+        shownCards[i].classList.remove('open', 'show');
+          }
 }
