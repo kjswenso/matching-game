@@ -63,17 +63,25 @@ deck.addEventListener('click', function (e) {
       }
       else {
       	e.target.classList.add('open', 'show');
-      	shownCards.push(e.target.querySelector('i').classList.value); 
+      	shownCards.push(e.target/*.querySelector('i').classList.value*/); 
         console.log(shownCards);
-      }
-       }
-    if (shownCards.length === 2) {
-      if (shownCards[0] === shownCards[1]) {
-        console.log('match');
-      }
-      else {
-        console.log('not a match');
       }
     }
 
+    checkForMatch(); 
+
 });
+
+//check to see if cards are a match
+function checkForMatch() {
+  if (shownCards.length === 2) {
+        if (shownCards[0].querySelector('i').classList.value === shownCards[1].querySelector('i').classList.value) {
+          console.log('match');
+        }
+        else {
+          for (let i = 0; i < shownCards.length; i++) {
+          shownCards[i].classList.remove('open', 'show');
+          }
+        }
+      }
+}
