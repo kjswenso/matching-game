@@ -82,6 +82,7 @@ function checkForMatch() {
           for (let i = 0; i < shownCards.length; i++) {
           shownCards[i].classList.remove('open', 'show');
           }
+          shownCards.splice(0, 2);
         }
       }
 }
