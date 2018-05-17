@@ -48,12 +48,6 @@ function shuffle(array) {
  */
 
 
-/*//iterate over cards array to get info
-for (let i = 0; i < cards.length; i++) {
-	console.log(cards[i].classList);
-}*/
-
-
 //Code modified from Avoid Too Many Events lesson
 //Add event listener for when cards are clicked
 deck.addEventListener('click', function (e) {
@@ -76,13 +70,14 @@ deck.addEventListener('click', function (e) {
 function checkForMatch() {
   if (shownCards.length === 2) {
         if (shownCards[0].querySelector('i').classList.value === shownCards[1].querySelector('i').classList.value) {
-          console.log('match');
+          matchesMade.push(shownCards);
+          console.log(matchesMade);
         }
         else {
           for (let i = 0; i < shownCards.length; i++) {
           shownCards[i].classList.remove('open', 'show');
           }
-          shownCards.splice(0, 2);
         }
+        shownCards.splice(0, 2);
       }
 }
