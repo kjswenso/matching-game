@@ -60,16 +60,20 @@ deck.addEventListener('click', function (e) {
         console.log(shownCards);
       }
        }
+       checkForMatch();
 });
 
 //list for open cards
 let shownCards = []; 
 
 //check to see if cards match
-/*function checkForMatch {
-  if (shownCards.length === 2)
+function checkForMatch(array) {
+  if (shownCards.length === 2) {
+    //let symbol = shownCards[i].child.classList;
+    console.log ('length is two');
+  }
 
-}*/
+}
 
 //list for matched cards
 let matchesMade = [];
