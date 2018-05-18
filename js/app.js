@@ -57,12 +57,13 @@ deck.addEventListener('click', function (e) {
       }
       else {
       	e.target.classList.add('open', 'show');
-      	shownCards.push(e.target/*.querySelector('i').classList.value*/); 
+      	shownCards.push(e.target); 
         console.log(shownCards);
       }
     }
 
-    checkForMatch(); 
+    checkForMatch();
+    gameWon();
 
 });
 
@@ -73,7 +74,8 @@ function checkForMatch() {
           cardsMatch();
         }
         else {
-          cardsDontMatch();
+          setTimeout(cardsDontMatch, 1000);
+         // cardsDontMatch();
         }
         shownCards.splice(0, 2);
       }
@@ -94,4 +96,10 @@ function cardsDontMatch() {
   for (let i = 0; i < shownCards.length; i++) {
         shownCards[i].classList.remove('open', 'show');
           }
+}
+
+function gameWon() {
+  if (matchesMade.length === 8) {
+    alert('Game won!');
+  }
 }
