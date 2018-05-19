@@ -15,7 +15,8 @@ let matchesMade = [];
 let counter = 0;
 
 function changeCounter() {
-  counter++;
+  document.querySelector('.moves').innerText = counter;
+  return counter;
 }
 
 /*
@@ -57,6 +58,7 @@ function shuffle(array) {
 
 //if cards match, move into matches list and disable
 function cardsMatch() {
+  counter++;
     matchesMade.push(shownCards);
     console.log(matchesMade);
     for (let i = 0; i < shownCards.length; i++) {
@@ -68,6 +70,7 @@ function cardsMatch() {
 
 //if cards don't match, flip them back over
 function cardsDontMatch() {
+  counter++;
   for (let i = 0; i < shownCards.length; i++) {
         shownCards[i].classList.remove('open', 'show');
           }
@@ -85,7 +88,7 @@ function checkForMatch() {
           setTimeout(cardsDontMatch, 1000);
         }
       }
-    changeCounter();
+      changeCounter();
 }
 
 function gameWon() {
@@ -111,10 +114,9 @@ function startTimer() {
 
 function modal() {
   const modal = document.querySelector('.modal');
-  /*const winMoves = document.querySelector('.win-moves');
-  const winStars = document.querySelector('.win-stars');*/
+  //const winStars = document.querySelector('.win-stars');
   modal.style.display = 'block';
-
+  document.querySelector('.win-moves').innerText = counter;
 }
 
 deck.addEventListener('click', startTimer);
