@@ -11,6 +11,13 @@ let shownCards = [];
 //list for matched cards
 let matchesMade = [];
 
+//move counter
+let counter = 0;
+
+function changeCounter() {
+  counter++;
+}
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -48,7 +55,6 @@ function shuffle(array) {
  */
 
 
-
 //if cards match, move into matches list and disable
 function cardsMatch() {
     matchesMade.push(shownCards);
@@ -65,7 +71,7 @@ function cardsDontMatch() {
   for (let i = 0; i < shownCards.length; i++) {
         shownCards[i].classList.remove('open', 'show');
           }
-     shownCards.splice(0, 2);
+    shownCards.splice(0, 2);
 }
 
 
@@ -79,28 +85,49 @@ function checkForMatch() {
           setTimeout(cardsDontMatch, 1000);
         }
       }
+    changeCounter();
 }
 
 function gameWon() {
   if (matchesMade.length === 8) {
-    alert('Game won!');
+    modal();
+    stopTimer();
   }
 }
 
-//Code modified from Avoid Too Many Events lesson
-//Add event listener for when cards are clicked
-deck.addEventListener('click', function (e) {
-    if (e.target.nodeName === 'LI') {  // ← verifies target is desired element
-      if (e.target.classList.contains('show')) {
-        console.log("has show");
-      }
-      else {
-      	e.target.classList.add('open', 'show');
-      	shownCards.push(e.target); 
-        console.log(shownCards);
-      }
-    }
+//timer function from http://logicalmoon.com/2015/05/using-javascript-to-create-a-timer/
+function startTimer() {
+  let seconds = 0;
+  timer = setInterval(function() {
+      seconds ++;
+      document.querySelector('.seconds').innerText = seconds % 60;
+            document.querySelector('.minutes').innerText = parseInt(seconds / 60);
+        }, 1000);
+}
 
+ function stopTimer() {
+    clearInterval(timer);
+}
+
+function modal() {
+  const modal = document.querySelector('.modal');
+  /*const winMoves = document.querySelector('.win-moves');
+  const winStars = document.querySelector('.win-stars');*/
+  modal.style.display = 'block';
+
+}
+
+deck.addEventListener('click', startTimer);
+
+//Code modified from Avoid Too Many Events lesson
+//Add event listener f when cards are clicked
+deck.addEventListener('click', function (e) {
+  deck.removeEventListener('click', startTimer);
+    if (e.target.nodeName === 'LI') {  // ← verifies target is desired element
+        e.target.classList.add('open', 'show');
+      	shownCards.push(e.target); 
+        console.log(counter);
+    }
     checkForMatch();
     gameWon();
 
