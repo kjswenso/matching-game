@@ -23,14 +23,6 @@ function changeCounter() {
   document.querySelector('.moves').innerText = counter;
 }
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
-
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -47,10 +39,24 @@ function shuffle(array) {
     return array;
 }
 
-function newDeck() {
-  shuffle(cardDeck);
-
+//clear deck before adding new shuffled cards
+function clearDeck() {
+  while (deck.firstChild) {
+    deck.removeChild(deck.firstChild);
+  }
 }
+
+function newDeck() {
+  clearDeck();
+  shuffle(cardDeck);
+  //let newCards;
+  for (let i = 0; i < cardDeck.length; i++) {
+    let newCardClass = cardDeck[i]; 
+  deck.appendChild(newCardClass);
+  }
+}
+
+window.onload = newDeck();
 
 //if cards match, move into matches list and disable
 function cardsMatch() {
@@ -110,11 +116,11 @@ function startTimer() {
 
 //decreases stars based on amount of moves
 function changeStars() {
-  if (counter === 15) {
-    stars.removeChild(stars.childNodes[0]);
+  if (counter === 20) {
+    stars.removeChild(stars.firstChild);
     starNum = 2;
-  } else if (counter === 25) {
-    stars.removeChild(stars.childNodes[0]);
+  } else if (counter === 30) {
+    stars.removeChild(stars.firstChild);
     starNum = 1;
   }
 }
