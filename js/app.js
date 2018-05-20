@@ -104,8 +104,8 @@ function startTimer() {
       let secs = seconds % 60;
       let mins = parseInt(seconds / 60);
       let displayTime = ('00' + seconds).slice(-2);
-      secDisplay.innerText = secs;
-      minDisplay.innerText = mins;
+      secDisplay.innerHTML = secs;
+      minDisplay.innerHTML = mins;
         }, 1000);
 }
 
@@ -131,8 +131,8 @@ function resetGame() {
   newDeck();
   //reset timer to zero, add new event listener to start timer
   stopTimer();
-  document.querySelector('.seconds').innerText = 0;
-  document.querySelector('.minutes').innerText = 0;
+  document.querySelector('.seconds').innerHTML = 0;
+  document.querySelector('.minutes').innerHTML = 0;
   
   //reset counter to 0
   counter = 0;
@@ -156,7 +156,7 @@ function resetGame() {
   }
 
   //reattach timer listener
-  deck.addEventListener('click', startTimer);
+  deck.addEventListener('click', startTimer, {once: true});
 }
 
 //adds pop-up upon winning game displaying end game stats
@@ -172,13 +172,13 @@ function modal() {
 }
 
 //start timer on first click within deck
-deck.addEventListener('click', startTimer);
+deck.addEventListener('click', startTimer, {once: true});
 
 //Code modified from Udacity Avoid Too Many Events lesson
 //Add event listener f when cards are clicked
 deck.addEventListener('click', function (e) {
   //remove the timer listener so it doesn't create new ones
-  deck.removeEventListener('click', startTimer);
+  //deck.removeEventListener('click', startTimer);
     if (e.target.nodeName === 'LI') {  // ← verifies target is desired element
         e.target.classList.add('open', 'show');
       	shownCards.push(e.target); 
