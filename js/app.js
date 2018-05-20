@@ -15,7 +15,7 @@ let matchesMade = [];
 let counter = 0;
 
 //star icon list & number of stars 
-const stars = document.querySelector('.stars');
+const stars = document.querySelector('.stars').children;
 let starNum = 3;
 
 function changeCounter() {
@@ -39,17 +39,8 @@ function shuffle(array) {
     return array;
 }
 
-//clear deck before adding new shuffled cards
-function clearDeck() {
-  while (deck.firstChild) {
-    deck.removeChild(deck.firstChild);
-  }
-}
-
 function newDeck() {
-  clearDeck();
   shuffle(cardDeck);
-  //let newCards;
   for (let i = 0; i < cardDeck.length; i++) {
     let newCardClass = cardDeck[i]; 
   deck.appendChild(newCardClass);
@@ -90,6 +81,8 @@ function checkForMatch() {
     }
 }
 
+
+
 function gameWon() {
   if (matchesMade.length === 8) {
     modal();
@@ -116,16 +109,18 @@ function startTimer() {
 
 //decreases stars based on amount of moves
 function changeStars() {
-  if (counter === 20) {
-    stars.removeChild(stars.firstChild);
+
+  if (counter === 3) {
     starNum = 2;
-  } else if (counter === 30) {
-    stars.removeChild(stars.firstChild);
+    stars[0].style.display = "none";
+  } else if (counter === 5) {
     starNum = 1;
+    stars[1].style.display = "none";
   }
 }
 
 function resetGame() {
+  newDeck();
   //reset timer to zero, add new event listener to start timer
   stopTimer();
   document.querySelector('.seconds').innerText = 0;
@@ -137,7 +132,7 @@ function resetGame() {
 
   //reset stars
    //loop over and remove stars to start fresh
-  while (stars.firstChild) {
+ /* while (stars.firstChild) {
     stars.removeChild(stars.firstChild);
   }
   
@@ -146,7 +141,9 @@ function resetGame() {
       starSymbol = document.createElement('li');
       starSymbol.classList.add('fas', 'fa-star');
       stars.appendChild(starSymbol);
-    }
+    }*/
+    stars[0].style.display = "inline-block"
+    stars[1].style.display = "inline-block"
 
   //flip all cards face down
   for (let i = 0; i < cards.length; i++) {
