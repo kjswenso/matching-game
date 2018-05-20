@@ -49,6 +49,7 @@ function shuffle(array) {
 
 function newDeck() {
   shuffle(cardDeck);
+
 }
 
 //if cards match, move into matches list and disable
@@ -91,6 +92,8 @@ function gameWon() {
 }
 
 //timer function from http://logicalmoon.com/2015/05/using-javascript-to-create-a-timer/
+let timer;
+
 function startTimer() {
   let seconds = 0;
   timer = setInterval(function() {
@@ -107,10 +110,10 @@ function startTimer() {
 
 //decreases stars based on amount of moves
 function changeStars() {
-  if (counter === 3) {
+  if (counter === 15) {
     stars.removeChild(stars.childNodes[0]);
     starNum = 2;
-  } else if (counter === 5) {
+  } else if (counter === 25) {
     stars.removeChild(stars.childNodes[0]);
     starNum = 1;
   }
@@ -131,17 +134,13 @@ function resetGame() {
   while (stars.firstChild) {
     stars.removeChild(stars.firstChild);
   }
-
+  
   //create three stars to add into score panel
     for (let i = 0; i < 3; i++) {
-      const starLi = document.createElement('li');
-      for (let j = 0; j < 1; j++) {
-        let starSymbol = document.createElement('i');
-        starSymbol.classList.add('fas', 'fa-star');
-      }
-      starLi.appendChild(starSymbol);
+      starSymbol = document.createElement('li');
+      starSymbol.classList.add('fas', 'fa-star');
+      stars.appendChild(starSymbol);
     }
-    stars.appendChild(starLi);
 
   //flip all cards face down
   for (let i = 0; i < cards.length; i++) {
