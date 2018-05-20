@@ -39,8 +39,11 @@ function shuffle(array) {
     return array;
 }
 
+//creates a new shuffled deck
 function newDeck() {
+  //shuffles the deck
   shuffle(cardDeck);
+  //loops through newly shuffled deck and appends to html
   for (let i = 0; i < cardDeck.length; i++) {
     let newCardClass = cardDeck[i]; 
   deck.appendChild(newCardClass);
@@ -81,8 +84,7 @@ function checkForMatch() {
     }
 }
 
-
-
+//when all matches made, modal pops up and timer stops
 function gameWon() {
   if (matchesMade.length === 8) {
     modal();
@@ -97,8 +99,13 @@ function startTimer() {
   let seconds = 0;
   timer = setInterval(function() {
       seconds++;
-      document.querySelector('.seconds').innerText = seconds % 60;
-            document.querySelector('.minutes').innerText = parseInt(seconds / 60);
+      const secDisplay = document.querySelector('.seconds');
+      const minDisplay = document.querySelector('.minutes');
+      let secs = seconds % 60;
+      let mins = parseInt(seconds / 60);
+      let displayTime = ('00' + seconds).slice(-2);
+      secDisplay.innerText = secs;
+      minDisplay.innerText = mins;
         }, 1000);
 }
 
@@ -110,15 +117,16 @@ function startTimer() {
 //decreases stars based on amount of moves
 function changeStars() {
 
-  if (counter === 3) {
+  if (counter === 15) {
     starNum = 2;
     stars[0].style.display = "none";
-  } else if (counter === 5) {
+  } else if (counter === 20) {
     starNum = 1;
     stars[1].style.display = "none";
   }
 }
 
+//reset the game
 function resetGame() {
   newDeck();
   //reset timer to zero, add new event listener to start timer
@@ -130,20 +138,9 @@ function resetGame() {
   counter = 0;
   document.querySelector('.moves').innerText = 0; 
 
-  //reset stars
-   //loop over and remove stars to start fresh
- /* while (stars.firstChild) {
-    stars.removeChild(stars.firstChild);
-  }
-  
-  //create three stars to add into score panel
-    for (let i = 0; i < 3; i++) {
-      starSymbol = document.createElement('li');
-      starSymbol.classList.add('fas', 'fa-star');
-      stars.appendChild(starSymbol);
-    }*/
-    stars[0].style.display = "inline-block"
-    stars[1].style.display = "inline-block"
+  //reset stars by showing them again
+  stars[0].style.display = "inline-block"
+  stars[1].style.display = "inline-block"
 
   //flip all cards face down
   for (let i = 0; i < cards.length; i++) {
@@ -158,24 +155,29 @@ function resetGame() {
     matchesMade.splice(0, 1);
   }
 
+  //reattach timer listener
   deck.addEventListener('click', startTimer);
 }
 
 //adds pop-up upon winning game displaying end game stats
 function modal() {
   const modal = document.querySelector('.modal');
+  const winTime = document.querySelector('.win-time');
   const winMoves = document.querySelector('.win-moves');
   const winStars = document.querySelector('.win-stars');
   modal.style.display = 'block';
+  winTime.innerText = document.querySelector('.timer').innerText;
   winMoves.innerText = counter;
   winStars.innerText = starNum;
 }
 
+//start timer on first click within deck
 deck.addEventListener('click', startTimer);
 
 //Code modified from Udacity Avoid Too Many Events lesson
 //Add event listener f when cards are clicked
 deck.addEventListener('click', function (e) {
+  //remove the timer listener so it doesn't create new ones
   deck.removeEventListener('click', startTimer);
     if (e.target.nodeName === 'LI') {  // ← verifies target is desired element
         e.target.classList.add('open', 'show');
