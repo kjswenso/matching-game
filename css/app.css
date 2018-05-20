@@ -126,5 +126,10 @@ h1 {
 
 .win-info {
     padding-left: 0px;
-    list-style-type: none;
+    list-style: none;
+}
+.win-stars {
+    padding-left: 0px;
+    list-style: none;
+    display: inline-block;
 }
