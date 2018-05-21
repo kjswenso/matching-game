@@ -103,8 +103,8 @@ function startTimer() {
       const minDisplay = document.querySelector('.minutes');
       let secs = seconds % 60;
       let mins = parseInt(seconds / 60);
-      let displayTime = ('00' + seconds).slice(-2);
-      secDisplay.innerHTML = secs;
+      let displayTime = ('00' + secs).slice(-2);
+      secDisplay.innerHTML = displayTime;
       minDisplay.innerHTML = mins;
         }, 1000);
 }
@@ -175,13 +175,15 @@ function modal() {
 deck.addEventListener('click', startTimer, {once: true});
 
 //Code modified from Udacity Avoid Too Many Events lesson
-//Add event listener f when cards are clicked
+//Add event listener for when cards are clicked
 deck.addEventListener('click', function (e) {
-  //remove the timer listener so it doesn't create new ones
-  //deck.removeEventListener('click', startTimer);
-    if (e.target.nodeName === 'LI') {  // ← verifies target is desired element
-        e.target.classList.add('open', 'show');
-      	shownCards.push(e.target); 
+    if (e.target.nodeName === 'LI') {
+      //when two cards are showing, do nothing
+      if (shownCards.length === 2) {
+        return;
+      }
+      e.target.classList.add('open', 'show');
+      shownCards.push(e.target); 
     }
 
     changeStars();
