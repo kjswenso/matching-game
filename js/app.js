@@ -6,7 +6,7 @@ let cards = document.getElementsByClassName('card');
 const cardDeck = [...cards];
 
 //list of open cards
-let shownCards = []; 
+let shownCards = [];
 
 //list for matched cards
 let matchesMade = [];
@@ -14,7 +14,7 @@ let matchesMade = [];
 //increase counter
 let counter = 0;
 
-//star icon list & number of stars 
+//star icon list & number of stars
 const stars = document.querySelector('.stars').children;
 let starNum = 3;
 
@@ -45,7 +45,7 @@ function newDeck() {
   shuffle(cardDeck);
   //loops through newly shuffled deck and appends to html
   for (let i = 0; i < cardDeck.length; i++) {
-    let newCardClass = cardDeck[i]; 
+    let newCardClass = cardDeck[i];
   deck.appendChild(newCardClass);
   }
 }
@@ -136,7 +136,7 @@ function resetGame() {
   
   //reset counter to 0
   counter = 0;
-  document.querySelector('.moves').innerText = 0; 
+  document.querySelector('.moves').innerText = 0;
 
   //reset stars by showing them again
   stars[0].style.display = "inline-block"
@@ -147,7 +147,7 @@ function resetGame() {
     cards[i].classList.remove('match');
   }
 
-  //close modal 
+  //close modal
   document.querySelector('.modal').style.display = 'none';
 
   //reset matchesMade array
@@ -186,7 +186,7 @@ deck.addEventListener('click', function (e) {
         return;
       }
       e.target.classList.add('open', 'show');
-      shownCards.push(e.target); 
+      shownCards.push(e.target);
     }
 
     changeStars();
