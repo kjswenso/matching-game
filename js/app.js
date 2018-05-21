@@ -57,7 +57,7 @@ function cardsMatch() {
   matchesMade.push(shownCards);
   for (let i = 0; i < shownCards.length; i++) {
     shownCards[i].classList.remove('open', 'show');
-    shownCards[i].classList.add('match', 'disabled');
+    shownCards[i].classList.add('match');
   }
   shownCards.splice(0, 2);
 }
@@ -144,7 +144,7 @@ function resetGame() {
 
   //flip all cards face down
   for (let i = 0; i < cards.length; i++) {
-    cards[i].classList.remove('match', 'disabled');
+    cards[i].classList.remove('match');
   }
 
   //close modal 
@@ -180,6 +180,9 @@ deck.addEventListener('click', function (e) {
     if (e.target.nodeName === 'LI') {
       //when two cards are showing, do nothing
       if (shownCards.length === 2) {
+        return;
+      }
+      if (e.target.classList.contains('match')) {
         return;
       }
       e.target.classList.add('open', 'show');
