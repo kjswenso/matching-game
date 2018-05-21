@@ -11,6 +11,10 @@ Upon flipping the first card, a timer shown at the top of the screen will begin.
 
 When the player has found all the matches, a popup window will notify them of their victory. It will provide the information of the time they beat the game in, the number of moves, and their star rating. It will then ask them if they would like to play again. 
 
+### Known Bugs
+
+Double clicking a card makes it match itself
+
 ### Dependencies 
 
 *  fontawesome for the icons
