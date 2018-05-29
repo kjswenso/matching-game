@@ -73,12 +73,16 @@ function cardsDontMatch() {
 
 //check to see if cards are a match
 function checkForMatch() {
+  if (shownCards.length === 1) {
+    shownCards[0].style.pointerEvents = "none";
+  }
     if (shownCards.length === 2) {
         if (shownCards[0].querySelector('i').classList.value === shownCards[1].querySelector('i').classList.value) {
           cardsMatch();
         }
         else {
           setTimeout(cardsDontMatch, 1000);
+          shownCards[0].style.pointerEvents = "auto";
         }
         changeCounter();
     }
